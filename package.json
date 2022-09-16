@@ -1,0 +1,25 @@
+{
+  "name": "perl5-coresmokedb-web",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --host",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix-dry-run src"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "vue": "^3.2.38",
+    "vue-router": "^4.0.13",
+    "vue-select": "^4.0.0-beta.5",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.18.9",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.4.0",
+    "prettier": "2.7.1",
+    "vite": "^3.0.9"
+  }
+}

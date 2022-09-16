@@ -1,0 +1,152 @@
+#! /usr/bin/env perl -w
+use v5.10.1;
+use strict;
+
+package VueServer 0.001 {
+    use warnings;
+    use strict;
+    use HTTP::Server::Simple::CGI;
+    use parent qw(HTTP::Server::Simple::CGI);
+    use File::Spec::Functions;
+    use Cwd qw(abs_path);
+    use MIME::Types;
+
+    my $_docroot = abs_path('.');
+    my $_types = MIME::Types->new();
+    my $CRLF = "\015\012";
+    my $index = 'index.html';
+
+    sub new {
+        my $class = shift;
+
+        my %extra = ();
+        if (UNIVERSAL::isa($_[-1], 'HASH')) {
+            %extra = %{ pop @_ };
+        }
+
+        # set document-root
+        if (my $dr = $extra{docroot}) {
+            my $fqdr = abs_path($dr);
+            if (-d $fqdr) {
+                $_docroot = $fqdr;
+            }
+            else {
+                die("Not a directory: '$fqdr'");
+            }
+        }
+        warn("DocumentRoot set to '$_docroot'\n");
+
+        $class->SUPER::new(@_);
+    }
+
+    sub handle_request {
+        my $self = shift;
+        my $cgi  = shift;
+
+        my $path = $cgi->path_info();
+        $path .= $index if $path =~ m{ / $}x;
+        $path = $index if $path !~ m{ \.\w+ $}x;
+        warn("Resolving '$path'\n");
+
+        my $fqpath = abs_path(catfile($_docroot, $path)) // catfile($_docroot, $index);;
+        if ($fqpath and $fqpath !~ m{^ $_docroot }x) {
+            warn("Will not serve '$path' resolved to '$fqpath'");
+            return;
+        }
+
+        if ($fqpath and -f $fqpath) {
+            if (open(my $fh, '<', $fqpath)) {
+                my $content = do { local $/; <$fh> };
+                close($fh);
+
+                my $mime = $_types->mimeTypeOf($fqpath) // 'application/octet-stream';
+                warn("Serve '$fqpath' of type $mime\n");
+
+                print "HTTP/1.0 200 OK$CRLF";
+                print do { local $^W; $cgi->header(-type => $mime) }, $content;
+                return;
+            }
+            warn("Could not open($fqpath): $!");
+        }
+
+        warn("307 for '$fqpath'\n");
+        print "HTTP/1.0 307 Temporary Redirect$CRLF";
+        print "Location: /${index}$CRLF";
+    }
+
+    1;
+}
+
+use Getopt::Long;
+my %option = (
+    docroot    => '.',
+    port       => 8080,
+    background => 0,
+    logfile    => '',
+);
+GetOptions(\%option, qw{
+    docroot|d=s
+    port|p=i
+    background
+    logfile|l=s
+});
+
+my $_log;
+
+if ($option{logfile}) {
+    if (open($_log, '>>', $option{logfile})) {
+        warn("Redirecting output to '$option{logfile}'\n");
+        my $old_handle = select($_log); $|++; select($old_handle);
+        $SIG{__WARN__} = sub {
+            print {$_log} $_ for @_;
+        };
+    }
+    else {
+        warn("Cannot append($option{logfile}): $!\n");
+    }
+}
+
+my $server = VueServer->new($option{port}, {docroot => $option{docroot}});
+if ($option{background}) {
+    my $pid = $server->background();
+    warn("Server started in the background: $pid\n");
+}
+else {
+    $server->run();
+}
+
+END { close($_log) if defined(fileno($_log)); }
+
+=head1 NAME
+
+vue-httpd - A simple webserver for a vue-project.
+
+=head1 SYNOPSIS
+
+    $ vue-httpd [options]
+
+=head1 OPTIONS
+
+  --docroot|-d <directory>    Document root ('.')
+  --port|-p <port#>           Port to listen to (8080)
+  --logfile|-l <filename>     Filename to log to (empty => STDERR)
+
+  --background                Run service in the background
+
+=head1 DESCRIPTION
+
+This server is based on L<HTTP::Server::Simple::CGI> and is fairly simple:
+
+=over
+
+=item If the file exists, serve it
+
+=item Else serve F<index.html>
+
+=back
+
+=head1 AUTHOR
+
+E<copy> MMXXII - Abe Timmerman <abeltje@test-smoke.org>
+
+=cut

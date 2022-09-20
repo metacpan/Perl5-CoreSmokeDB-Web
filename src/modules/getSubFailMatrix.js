@@ -31,7 +31,7 @@ const actions = {
 
     if (data.pversion === null) { data.pversion = "" };
     const params = new URLSearchParams(data);
-    const response = await p5sdbClient.request({
+    const response = await p5sdbClient({
       url:    '/submatrix',
       method: 'get',
       params: params,

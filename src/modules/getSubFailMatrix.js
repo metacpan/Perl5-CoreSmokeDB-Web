@@ -29,10 +29,12 @@ const actions = {
   async getSubFailMatrix({ commit }, data) {
     logDebug(`getSubFailMatrix(${JSON.stringify(data)}`);
 
+    if (data.pversion === null) { data.pversion = "" };
+    const params = new URLSearchParams(data);
     const response = await p5sdbClient.request({
-      url: "/submatrix",
+      url:    '/submatrix',
       method: 'get',
-      params: data,
+      params: params,
     });
     logDebug(`/submatrix.response: ${JSON.stringify(response)}`);
 

@@ -10,6 +10,10 @@ export default defineConfig({
     'APP_VERSION': JSON.stringify(process.env.npm_package_version),
     'APP_NAME':    JSON.stringify(process.env.npm_package_name),
   },
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

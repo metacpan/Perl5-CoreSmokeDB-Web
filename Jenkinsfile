@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script { echo "Building branch: " + scm.branches[0].name }
                 sh '''
-npm install vite
+npm install
 npm run build
                 '''
             }

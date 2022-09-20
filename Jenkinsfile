@@ -23,7 +23,7 @@ npm run build
             steps {
                 sshagent(['ssh-deploy']) {
                     sh '''
-/usr/bin/deploy -av dist/ perl5smokedb.fritz.box:/var/lib/www/CoreSmokeDBWeb.preview/
+/usr/bin/deploy -av dist/ perl5smokedb.fritz.box:/var/lib/www/CoreSmokeDBWeb-preview/
                     '''
                 }
             }

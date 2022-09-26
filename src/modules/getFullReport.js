@@ -1,14 +1,15 @@
-import { p5sdbClient } from "@/clients/p5sdbClient";
+import { p5sdbClient } from '@/clients/p5sdbClient';
+import { logTrace }    from '@/helpers/logging';
 
 const defaultState = () => {
-  return { fullReportData: {} };
+  return { fullReportData: {}, _loaded: false };
 }
 
 const state = defaultState();
 
 const getters = {
   hasFullReport: (state) => {
-    return (Object.entries(state.fullReportData) > 0);
+    return state._loaded;
   },
   reportData:    (state) => {
     return state.fullReportData;
@@ -21,6 +22,7 @@ const mutations = {
   },
   setFullReport(state, data) {
     state.fullReportData = data;
+    state._loaded = true;
   },
 };
 
@@ -28,6 +30,7 @@ const actions = {
   async getFullReport({ commit }, reportId) {
     const response = await p5sdbClient.get("/full_report_data/" + reportId);
 
+    logTrace(`setFullReport(${reportId}): ${JSON.stringify(response.data)}`);
     commit("setFullReport", response.data);
   }
 };

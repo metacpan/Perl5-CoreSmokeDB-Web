@@ -1,6 +1,6 @@
-import { p5sdbClient } from '@/clients/p5sdbClient';
-import { logDebug }    from '@/helpers/logging';
-import SmokeReport     from '@/models/SmokeReport';
+import { p5sdbClient }        from '@/clients/p5sdbClient';
+import { logDebug, logTrace } from '@/helpers/logging';
+import SmokeReport            from '@/models/SmokeReport';
 
 const defaultState = () => {
   return {
@@ -36,7 +36,6 @@ const mutations = {
     state.reportCount = data.reportCount;
     state.pageNumber = data.pageNumber;
     state._loaded = true;
-    console.log(`XXXXX ${JSON.stringify(state)} XXXXX `);
   },
 };
 
@@ -54,15 +53,26 @@ const actions = {
     else { // getSerchResults
       type = 'search';
       const params = new URLSearchParams(searchArguments);
-      logDebug(`post-request: ${JSON.stringify(params)}`);
 
-      response = await p5sdbClient({
-        url: "/searchresults",
-        method: 'post',
-        data: params,
-      });
+      if (import.meta.env.VITE_API_SERVICE === 'rest') {
+        logDebug(`post-request: ${JSON.stringify(params)}`);
+        response = await p5sdbClient({
+          url:    "/searchresults",
+          method: 'get',
+          params: params,
+        });
+      }
+      else {
+        logDebug(`post-request: ${JSON.stringify(searchArguments)}`);
+        response = await p5sdbClient({
+          url:    "/searchresults",
+          method: 'post',
+          data:   params,
+        });
+      }
+
     }
-    logDebug(`getReports.${type}: ${JSON.stringify(response.data)}`);
+    logTrace(`getReports.${type}: ${JSON.stringify(response.data)}`);
 
     const reports = response.data.reports.map(
       function (report) {

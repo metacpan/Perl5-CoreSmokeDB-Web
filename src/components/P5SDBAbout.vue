@@ -4,7 +4,27 @@
   </div>
   <div class="show-report">
     This version consists of:
-    <ul>
+    <ul v-if="apiService === 'rest'">
+      <li>Frontend written in <span class="hl">VueJS 3</span>
+        ({{ webName }} v{{ webVersion }})
+      </li>
+      <li>Backend written in <span class="hl">Perl/Dancer-2</span>
+        (API: Perl5::CoreSmokeDB v{{ apiVersion }})
+      </li>
+      <li>ORM: <span class="hl">DBIx::Class</span>
+        (Schema.pm v{{ schemaVersion }}/tsgateway_config v{{ dbVersion }})
+      </li>
+      <li>Database <span class="hl">Postgresql-14</span></li>
+      <li>Reverse Proxy <span class="hl">nginx</span></li>
+      <li>OS <span class="hl">Ubuntu 22.04 (jammy)</span></li>
+      <li>CI by <span class="hl">Jenkins</span></li>
+      <li>
+        <a :href="`${apiUrl}/openapi/web`">OpenAPI/Swagger</a>
+        (<a :href="`${apiUrl}/openapi/web.yaml`">yaml</a>,
+        <a :href="`${apiUrl}/openapi/web.json`">json</a>)
+      </li>
+    </ul>
+    <ul v-else>
       <li>Frontend written in <span class="hl">VueJS 3</span>
         ({{ webName }} v{{ webVersion }})
       </li>
@@ -18,11 +38,6 @@
       <li>Reverse Proxy <span class="hl">nginx</span></li>
       <li>OS <span class="hl">Ubuntu 22.04 (jammy)</span></li>
       <li>CI by <span class="hl">Jenkins</span></li>
-      <li v-if="apiService === 'rest'"
-          ><a :href="`${apiUrl}/openapi/web`">OpenAPI/Swagger</a>
-        (<a :href="`${apiUrl}/openapi/web.yaml`">yaml</a>,
-        <a :href="`${apiUrl}/openapi/web.json`">json</a>)
-      </li>
     </ul>
 
     <P5SDBFullFooter />

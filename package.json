@@ -2,8 +2,10 @@
   "name": "perl5-coresmokedb-web",
   "version": "0.0.1",
   "scripts": {
+    "build:preview": "vite build --mode staging",
+    "build:main": "vite build --mode production",
     "build": "vite build",
-    "test": "vitest",
+    "test": "vitest run",
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix-dry-run src",
     "dev": "vite --host",

@@ -6,6 +6,7 @@
     "build:main": "vite build --mode production",
     "build": "vite build",
     "test": "vitest run",
+    "test:follow": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix-dry-run src",
     "dev": "vite --host",

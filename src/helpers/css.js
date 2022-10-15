@@ -3,7 +3,7 @@ function rowClass(row) {
 }
 
 function summaryClass(summary) {
-  const buildFailed = new RegExp('[cCmM]');
+  const buildFailed = new RegExp(/FAIL\([cCmM]\)/);
   if (summary === 'PASS')        { return 'passtest'  }
   if (summary === 'FAIL(X)')     { return 'failtodo'  }
   if (buildFailed.test(summary)) { return 'failbuild' }

@@ -3,20 +3,34 @@
  * - debug  => logDebug
  * - info   => logInfo
 */
+
+var Perl5CoreSmokeDBWebLogLevel = '';
+function setLogLevel(level) {
+  // console.log(`setLogLevel(${level}) [${Perl5CoreSmokeDBWebLogLevel}]`);
+  Perl5CoreSmokeDBWebLogLevel = level;
+  return Perl5CoreSmokeDBWebLogLevel;
+}
+
+function logLevel() {
+  // console.log(`We have internal: ${Perl5CoreSmokeDBWebLogLevel}`);
+  if (Perl5CoreSmokeDBWebLogLevel.length) {
+    return Perl5CoreSmokeDBWebLogLevel;
+  }
+  return import.meta.env.VITE_LOGGING;
+}
 function wantsTrace() {
-  return import.meta.env.VITE_LOGGING === 'trace';
+  return logLevel() === 'trace';
 }
 
 function wantsDebugging() {
-  // console.log(`LOGGING: '${import.meta.env.VITE_LOGGING}'`);
-  return import.meta.env.VITE_LOGGING === 'debug' ||
-         import.meta.env.VITE_LOGGING === 'trace';
+  return logLevel() === 'debug' ||
+         logLevel() === 'trace';
 }
 
 function wantsInfo() {
-  return import.meta.env.VITE_LOGGING === 'info'  ||
-         import.meta.env.VITE_LOGGING === 'debug' ||
-         import.meta.env.VITE_LOGGING === 'trace';
+  return logLevel() === 'info'  ||
+         logLevel() === 'debug' ||
+         logLevel() === 'trace';
 }
 
 function logTrace(message) {
@@ -31,4 +45,4 @@ function logInfo(message) {
   if (wantsInfo()) { console.log(message); }
 }
 
-export { logTrace, logDebug, logInfo }
+export { setLogLevel, logLevel, logTrace, logDebug, logInfo }

@@ -10,7 +10,7 @@ This software is the frontend to the API backend written in Perl.
 # INSTALLING
 
 Before you start you'll need to install a more modern nodejs/npm than Ubuntu provides on Jammy.
-I did the folling:
+I did the following to get node v18 (check [their github](https://deb.nodesource.com)):
 ```bash
 curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
     | gpg --dearmor | sudo tee /etc/apt/keyrings/nodesource.gpg >/dev/null

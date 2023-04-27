@@ -46,7 +46,7 @@ Skipped tests:
 
 Test failures:<span v-if="!hasLength(rd.test_failures)">
     None.</span><span v-for="(failure, idx) in rd.test_failures" v-else :key="idx">
-  {{ failure.test.test }} ({{ removeNewLines(failure.test.extra) }})
+  {{ failure.test.test }} ({{ failure.test.status }} {{ removeNewLines(failure.test.extra) }})
   <span v-for="(cfg, idxc) in failure.configs" :key="idxc">    [{{ cfg.io_envs}}] {{ cfg.arguments }}
   </span></span>
 <span v-if="hasLength(rd.test_todo_passed)">

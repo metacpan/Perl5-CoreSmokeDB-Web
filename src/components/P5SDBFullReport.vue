@@ -16,8 +16,8 @@
 <pre>
 Automated smoke report for branch {{ rd.smoke_branch }} {{ rd.perl_id }} patch {{ rd.git_id }} {{ rd.git_describe }}.
 {{ rd.hostname }}: {{rd.cpu_description}} ({{ rd.architecture }}/{{ rd.cpu_count }} cpus)
-    on        {{ rd.osname }} {{rd.osversion}}
-<span v-for="(cCompiler, idx) in rd.c_compilers" :key="idx">    using     {{ cCompiler.cc }} version {{ cCompiler.ccversion }} (*{{ idx+1 }})</span>
+    on        {{ rd.osname }} {{rd.osversion}}<span v-for="(cCompiler, idx) in rd.c_compilers" :key="idx">
+    using     {{ cCompiler.cc }} version {{ cCompiler.ccversion }} (*{{ idx+1 }})</span>
     smoketime {{ rd.duration_in_hhmm }} (average {{ rd.average_in_hhmm }})
 
 Summary: <span :class="summaryClass(rd.summary)">{{ rd.summary }}</span>

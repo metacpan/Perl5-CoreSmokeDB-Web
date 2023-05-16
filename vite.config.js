@@ -18,5 +18,11 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  server: {
+    headers: {
+//      'Content-Type': 'text/html; charset=utf8',
+      'Cache-Control': "no-store, no-cache, must-revalidate",
+    }
   }
 })

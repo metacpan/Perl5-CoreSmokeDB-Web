@@ -32,7 +32,7 @@ c = Configure, m = make, M = make (after miniperl), t = make test-prep
 ----------------------- ----------------------------------------------------
 {{ rd.matrix }}
 
-<span v-if="rd.harness_only === 1">
+<span v-if="rd.harness_only == 1">
 Testsuite was run only with 'harness'</span>
 <span v-if="hasLength(rd.applied_patches)">
 Applied patches:

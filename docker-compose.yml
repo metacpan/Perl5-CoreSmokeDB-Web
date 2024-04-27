@@ -1,0 +1,12 @@
+---
+version: "3"
+services:
+  perl5_coresmokedb_web:
+    container_name: dckr-perl5-coresmokedb-web
+    image: perl5-coresmokedb-web:latest
+    build:
+      context: .
+    ports:
+      - 5555:5555
+    restart: unless-stopped
+

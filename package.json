@@ -4,6 +4,7 @@
   "scripts": {
     "build:preview": "vite build --mode staging",
     "build:main": "vite build --mode production",
+    "build:docker": "vite build --mode docker",
     "build": "vite build",
     "test": "vitest run",
     "test:follow": "vitest",

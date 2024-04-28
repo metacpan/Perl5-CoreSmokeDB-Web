@@ -13,6 +13,7 @@
            + 2018&nbsp;<span style="color: yellow">Oslo</span>
            + Private&nbsp;2022&nbsp;<span style="color: yellow">abeltje</span>
            + PTS&nbsp;2023&nbsp;<span style="color: yellow">Lyon</span>
+           + 2024&nbsp;<span style="color: yellow">Lisbon</span>
       </span>
     </div>
 </template>

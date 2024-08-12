@@ -1,16 +1,18 @@
 # NAME
 
 Perl5-CoreSmokeDB-Web - Frontend SPA in VueJS to
-[Perl5-CoreSmokeDB-API](https://github.com/abeltje/Perl5-CoreSmokeDB-API#name)
+[Perl5-CoreSmokeDB-API](https://github.com/metacpan/Perl5-CoreSmokeDB-API#name)
 
-# DESCRIPTION
+## DESCRIPTION
 
 This software is the frontend to the API backend written in Perl.
 
-# INSTALLING
+## INSTALLING
 
-Before you start you'll need to install a more modern nodejs/npm than Ubuntu provides on Jammy.
-I did the following to get node v18 (check [their github](https://deb.nodesource.com)):
+Before you start you'll need to install a more modern nodejs/npm than Ubuntu
+provides on Jammy. I did the following to get node v18 (check [their
+github](https://deb.nodesource.com)):
+
 ```bash
 curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
     | gpg --dearmor | sudo tee /etc/apt/keyrings/nodesource.gpg >/dev/null
@@ -21,8 +23,9 @@ sudo apt install nodejs
 ```
 
 After installing the API service, basically:
+
 ```bash
-git clone https://github.com/abeltje/Perl5-CoreSmokeDB-Web.git
+git clone https://github.com/metacpan/Perl5-CoreSmokeDB-Web.git
 cd Perl5-CoreSmokeDB-Web
 npm install
 npm run dev
@@ -30,13 +33,14 @@ npm run dev
 
 Now point your webbrowser at `http://localhost:5173`
 
-# COPYRIGHT
+## COPYRIGHT
 
 &copy; MMXXII - Abe Timmerman <abeltje@cpan.org>
 
-# LICENSE
+## LICENSE
 
-This is free software; you can redistribute it and/or modify it under the same terms as Perl:
+This is free software; you can redistribute it and/or modify it under the same
+terms as Perl:
 
 - [the "Artistic License"](https://dev.perl.org/licenses/artistic.html)
 - [GNU General Public License](https://dev.perl.org/licenses/gpl1.html)

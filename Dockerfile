@@ -19,6 +19,6 @@ WORKDIR /var/lib/build-coresmokedb-web/
 RUN npm install && npm audit fix --force || true
 
 # Build the thing and deploy
-RUN npm run build:docker
+RUN npm run build:main
 RUN cp -a dist/ /var/lib/perl5-coresmokedb-web/
 WORKDIR /var/lib/perl5-coresmokedb-web/

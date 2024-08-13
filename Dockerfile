@@ -6,7 +6,7 @@ RUN apt update && apt upgrade -y && \
 
 COPY src            /var/lib/build-coresmokedb-web/src/
 COPY public         /var/lib/build-coresmokedb-web/public/
-COPY .env.docker    /var/lib/build-coresmokedb-web/
+COPY .env.*         /var/lib/build-coresmokedb-web/
 COPY package*       /var/lib/build-coresmokedb-web/
 COPY index.html     /var/lib/build-coresmokedb-web/
 COPY vite.config.js /var/lib/build-coresmokedb-web/

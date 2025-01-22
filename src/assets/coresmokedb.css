@@ -43,9 +43,9 @@ body {
     margin            : 0;
     padding           : 10px 0 0 150px;
     background        : #000;
-    background-image  : url("../assets/camel.svg"); /* fallback */
+    background-image  : url("../assets/smokedb.svg"); /* fallback */
     background-repeat : no-repeat;
-    background-image  : url("../assets/camel.svg"), linear-gradient(to right, #000, #DF6F00);
+    background-image  : url("../assets/smokedb.svg"), linear-gradient(to right, #000, #DF6F00);
 }
 
 #logo-bar h1 {

@@ -41,11 +41,11 @@ body {
     text-align        : left;
     height            : 150px;
     margin            : 0;
-    padding           : 0 0 0 150px;
+    padding           : 10px 0 0 150px;
     background        : #000;
-    background-image  : url("../assets/coresmokedb_logo.gif"); /* fallback */
+    background-image  : url("../assets/smokedb.svg"); /* fallback */
     background-repeat : no-repeat;
-    background-image  : url("../assets/coresmokedb_logo.gif"), linear-gradient(to right, #000, #DF6F00);
+    background-image  : url("../assets/smokedb.svg"), linear-gradient(to right, #000, #DF6F00);
 }
 
 #logo-bar h1 {
